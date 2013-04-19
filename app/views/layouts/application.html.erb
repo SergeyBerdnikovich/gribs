@@ -7,8 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
-<%= yield %>
-
+  <div id='header'>
+    <h1>Gribs</h1>
+    <div id='head_buttons' class="btn-group">
+      <%= link_to 'Dashboard', '#', :class => 'btn' %>
+      <%= link_to 'GAS', '#', :class => 'btn' %>
+      <%= link_to 'Products', '#', :class => 'btn' %>
+      <%= link_to 'Users', '#', :class => 'btn'%>
+    </div>
+  </div>
+  <hr />
+  <div id='content'>
+    <%= yield %>
+  </div>
 </body>
 </html>

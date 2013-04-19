@@ -1,0 +1,73 @@
+<div id='table'>
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Item SKU</th>
+        <th>Item UPC</th>
+        <th>Item Name</th>
+        <th>Item Brand</th>
+        <th>Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @products.each do |item_id, products| %>
+        <tr>
+          <td><%= products[0][0] %></td>
+          <td><%= products[0][1] %></td>
+          <td><%= products[0][2] %></td>
+          <td><%= products[0][3] %></td>
+          <td>
+            <%= products[0][5] %>%
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<hr />
+<div id='filter_zone'>
+  <div id='filter'>
+    <%= form_tag products_path, :method => :get do %>
+      <span>Period:</span>
+      <div id="datetimepicker" class="input-append">
+        <%= text_field_tag 'period_start', params[:period_start] %>
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+          </i>
+        </span>
+      </div>
+       -
+       <div id="datetimepicker1" class="input-append">
+        <%= text_field_tag 'period_end', params[:period_end] %>
+        <span class="add-on">
+          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+          </i>
+        </span>
+      </div>
+      <div id='percent_threshold'>
+        Percent Threshold:
+        <%= text_field_tag 'percent_threshold', params[:percent_threshold] %>
+      </div>
+
+      <script type="text/javascript">
+        $(function() {
+          $('#datetimepicker').datetimepicker({
+            format: 'yyyy/MM/dd',
+            pickTime: false
+          });
+          $('#datetimepicker1').datetimepicker({
+            format: 'yyyy/MM/dd',
+            pickTime: false
+          });
+        });
+      </script>
+
+      <%= submit_tag 'Refresh', :id => 'refresh', :class => 'btn' %>
+    <% end %>
+  </div>
+</div>
+<hr />
+<div id='download_links'>
+  Download: <%= link_to 'CSV', '#' %>, <%= link_to 'XML', '#' %>, <%= link_to 'JSON', '#' %>
+</div>

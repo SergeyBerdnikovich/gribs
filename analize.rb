@@ -75,9 +75,9 @@ insert =  "" + headers.join(" , ") + ""
 values = ""
 data.each{|dat|
 	if dat != nil
-values +=  "'" + $sql.escape(dat[0]) + "' , " 
-else 
-	values +=  "'" + "' , " 
+values +=  "'" + $sql.escape(dat[0]) + "' , "
+else
+	values +=  "'" + "' , "
 end
 }
 
@@ -133,7 +133,7 @@ rescue
 end
 
 begin
-req = "UPDATE products SET #{headers[1][0]} = '#{dat1}',  #{headers[3][0]} = '#{dat3}' WHERE #{headers[0][0]} = '#{dat0}' AND date = #{Time.now.strftime("%Y%m%d")}" 
+req = "UPDATE products SET #{headers[1][0]} = '#{dat1}',  #{headers[3][0]} = '#{dat3}' WHERE #{headers[0][0]} = '#{dat0}' AND date = #{Time.now.strftime("%Y%m%d")}"
 p req
 $sql.query(req)
 
