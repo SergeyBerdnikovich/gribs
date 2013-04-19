@@ -12,7 +12,7 @@ class Product < ActiveRecord::Base
       end
     end
     products.each do |item_id, products|
-      products[0] << ((products[1][4].to_f - products[0][4].to_f) / products[1][4].to_f) * 100
+      products[0] << ((products[1][4].to_f - products[0][4].to_f) / products[1][4] != 0 ? products[1][4].to_f : 1) * 100
     end
 
     products.select! {|item_id, products| products[0][5] > percent_threshold.to_f } unless percent_threshold.blank?
