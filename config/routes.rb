@@ -8,9 +8,8 @@ Griby::Application.routes.draw do
   end
 
   match "reports/mashrooms", to: "reports#mushrooms"
-  
 
-  devise_for :users
+  devise_for :users, :skip => [:passwords, :registrations]
 
   resources :notification_modes
 
