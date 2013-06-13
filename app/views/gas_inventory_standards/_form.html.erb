@@ -1,0 +1,33 @@
+<%= form_for(@gas_inventory_standard) do |f| %>
+  <% if @gas_inventory_standard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gas_inventory_standard.errors.count, "error") %> prohibited this gas_inventory_standard from being saved:</h2>
+
+      <ul>
+      <% @gas_inventory_standard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_id %><br />
+    <%= f.text_field :item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :qty_available %><br />
+    <%= f.number_field :qty_available %>
+  </div>
+  <div class="field">
+    <%= f.label :stock_status %><br />
+    <%= f.text_field :stock_status %>
+  </div>
+  <div class="field">
+    <%= f.label :active_status %><br />
+    <%= f.text_field :active_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

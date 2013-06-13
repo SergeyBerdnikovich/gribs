@@ -1,6 +1,45 @@
 Griby::Application.routes.draw do
 
-  root :to => 'products#index'
+  resources :gas_cost_standards
+
+
+  resources :static_pages do
+    get :welcome
+  end
+
+  match "reports/mashrooms", to: "reports#mushrooms"
+  
+
+  devise_for :users
+
+  resources :notification_modes
+
+
+  resources :notifications
+
+
+  resources :gas_inventory_standards
+
+
+  resources :gas_catalog_standards
+
+
+  resources :gas
+
+
+  resources :manufacturers
+
+
+  resources :quantities
+
+
+  resources :items
+
+
+  resources :itemids
+
+
+  root :to => 'static_pages#welcome'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)

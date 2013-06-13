@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @gas_inventory_standard.item_id %>
+</p>
+
+<p>
+  <b>Qty available:</b>
+  <%= @gas_inventory_standard.qty_available %>
+</p>
+
+<p>
+  <b>Stock status:</b>
+  <%= @gas_inventory_standard.stock_status %>
+</p>
+
+<p>
+  <b>Active status:</b>
+  <%= @gas_inventory_standard.active_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_gas_inventory_standard_path(@gas_inventory_standard) %> |
+<%= link_to 'Back', gas_inventory_standards_path %>

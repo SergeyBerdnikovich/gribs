@@ -1,0 +1,80 @@
+<%= form_for @product, :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :item_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :item_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :manufacturer_item_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :manufacturer_item_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :upc_or_ean_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :upc_or_ean_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :manufacturer_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :manufacturer_id, :class => 'number_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :product_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :product_name, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :short_description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :short_description, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :extended_description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :extended_description, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :images, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :images, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :weight, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :weight, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :length, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :length, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :width, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :width, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :height, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :height, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                products_path, :class => 'btn' %>
+  </div>
+<% end %>

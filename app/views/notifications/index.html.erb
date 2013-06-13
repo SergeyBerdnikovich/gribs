@@ -1,0 +1,31 @@
+<h1>Listing notifications</h1>
+
+<table>
+  <tr>
+    <th>Trashhold notification</th>
+    <th>Trashhold</th>
+    <th>Start qty notification</th>
+    <th>Start qty</th>
+    <th>Emails</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @notifications.each do |notification| %>
+  <tr>
+    <td><%= notification.trashhold_notification %></td>
+    <td><%= notification.trashhold %></td>
+    <td><%= notification.start_qty_notification %></td>
+    <td><%= notification.start_qty %></td>
+    <td><%= notification.emails %></td>
+    <td><%= link_to 'Show', notification %></td>
+    <td><%= link_to 'Edit', edit_notification_path(notification) %></td>
+    <td><%= link_to 'Destroy', notification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Notification', new_notification_path %>

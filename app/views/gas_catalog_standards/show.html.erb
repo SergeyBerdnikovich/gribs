@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @gas_catalog_standard.item_id %>
+</p>
+
+<p>
+  <b>Manufacturer item:</b>
+  <%= @gas_catalog_standard.manufacturer_item_id %>
+</p>
+
+<p>
+  <b>Upc or ean:</b>
+  <%= @gas_catalog_standard.upc_or_ean_id %>
+</p>
+
+<p>
+  <b>Manufacturer:</b>
+  <%= @gas_catalog_standard.manufacturer %>
+</p>
+
+<p>
+  <b>Product name:</b>
+  <%= @gas_catalog_standard.product_name %>
+</p>
+
+<p>
+  <b>Short description:</b>
+  <%= @gas_catalog_standard.short_description %>
+</p>
+
+<p>
+  <b>Extended description:</b>
+  <%= @gas_catalog_standard.extended_description %>
+</p>
+
+<p>
+  <b>Msrp:</b>
+  <%= @gas_catalog_standard.msrp %>
+</p>
+
+<p>
+  <b>Stock status:</b>
+  <%= @gas_catalog_standard.stock_status %>
+</p>
+
+
+<%= link_to 'Edit', edit_gas_catalog_standard_path(@gas_catalog_standard) %> |
+<%= link_to 'Back', gas_catalog_standards_path %>

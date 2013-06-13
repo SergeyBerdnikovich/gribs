@@ -1,0 +1,29 @@
+<%= form_for(@ga) do |f| %>
+  <% if @ga.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ga.errors.count, "error") %> prohibited this ga from being saved:</h2>
+
+      <ul>
+      <% @ga.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :product_id %><br />
+    <%= f.number_field :product_id %>
+  </div>
+  <div class="field">
+    <%= f.label :date_update %><br />
+    <%= f.number_field :date_update %>
+  </div>
+  <div class="field">
+    <%= f.label :qty %><br />
+    <%= f.number_field :qty %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

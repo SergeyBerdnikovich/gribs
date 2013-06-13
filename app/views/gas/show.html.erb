@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Product:</b>
+  <%= @ga.product_id %>
+</p>
+
+<p>
+  <b>Date update:</b>
+  <%= @ga.date_update %>
+</p>
+
+<p>
+  <b>Qty:</b>
+  <%= @ga.qty %>
+</p>
+
+
+<%= link_to 'Edit', edit_ga_path(@ga) %> |
+<%= link_to 'Back', gas_path %>

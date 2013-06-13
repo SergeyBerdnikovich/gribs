@@ -1,0 +1,53 @@
+<%= form_for(@gas_catalog_standard) do |f| %>
+  <% if @gas_catalog_standard.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gas_catalog_standard.errors.count, "error") %> prohibited this gas_catalog_standard from being saved:</h2>
+
+      <ul>
+      <% @gas_catalog_standard.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_id %><br />
+    <%= f.text_field :item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :manufacturer_item_id %><br />
+    <%= f.text_field :manufacturer_item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :upc_or_ean_id %><br />
+    <%= f.text_field :upc_or_ean_id %>
+  </div>
+  <div class="field">
+    <%= f.label :manufacturer %><br />
+    <%= f.text_field :manufacturer %>
+  </div>
+  <div class="field">
+    <%= f.label :product_name %><br />
+    <%= f.text_field :product_name %>
+  </div>
+  <div class="field">
+    <%= f.label :short_description %><br />
+    <%= f.text_field :short_description %>
+  </div>
+  <div class="field">
+    <%= f.label :extended_description %><br />
+    <%= f.text_field :extended_description %>
+  </div>
+  <div class="field">
+    <%= f.label :msrp %><br />
+    <%= f.text_field :msrp %>
+  </div>
+  <div class="field">
+    <%= f.label :stock_status %><br />
+    <%= f.text_field :stock_status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

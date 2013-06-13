@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Trashhold notification:</b>
+  <%= @notification.trashhold_notification %>
+</p>
+
+<p>
+  <b>Trashhold:</b>
+  <%= @notification.trashhold %>
+</p>
+
+<p>
+  <b>Start qty notification:</b>
+  <%= @notification.start_qty_notification %>
+</p>
+
+<p>
+  <b>Start qty:</b>
+  <%= @notification.start_qty %>
+</p>
+
+<p>
+  <b>Emails:</b>
+  <%= @notification.emails %>
+</p>
+
+
+<%= link_to 'Edit', edit_notification_path(@notification) %> |
+<%= link_to 'Back', notifications_path %>

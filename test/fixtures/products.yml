@@ -1,39 +1,29 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  date: 1
   item_id: MyString
   manufacturer_item_id: MyString
   upc_or_ean_id: MyString
+  manufacturer: MyString
+  product_name: MyString
+  short_description: MyString
   extended_description: MyString
   images: MyString
-  weight: MyString
-  length: MyString
-  width: MyString
-  height: MyString
-  categories: MyString
-  retail_map: MyString
-  msrp: MyString
-  stock_status: MyString
-  qty_available: 1
-  stock_status: MyString
-  active_status: MyString
+  weight: 1.5
+  length: 1.5
+  width: 1.5
+  height: 1.5
 
 two:
-  date: 1
   item_id: MyString
   manufacturer_item_id: MyString
   upc_or_ean_id: MyString
+  manufacturer: MyString
+  product_name: MyString
+  short_description: MyString
   extended_description: MyString
   images: MyString
-  weight: MyString
-  length: MyString
-  width: MyString
-  height: MyString
-  categories: MyString
-  retail_map: MyString
-  msrp: MyString
-  stock_status: MyString
-  qty_available: 1
-  stock_status: MyString
-  active_status: MyString
+  weight: 1.5
+  length: 1.5
+  width: 1.5
+  height: 1.5

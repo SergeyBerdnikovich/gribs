@@ -11,7 +11,10 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery.ui.all
 //= require jquery_ujs
-//= require bootstrap-datetimepicker
+//= require twitter/bootstrap
+//= require bootstrap
+//= require bootstrap-datepicker
 //= require_self
 //= require_tree .

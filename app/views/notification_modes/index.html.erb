@@ -1,0 +1,23 @@
+<h1>Listing notification_modes</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @notification_modes.each do |notification_mode| %>
+  <tr>
+    <td><%= notification_mode.name %></td>
+    <td><%= link_to 'Show', notification_mode %></td>
+    <td><%= link_to 'Edit', edit_notification_mode_path(notification_mode) %></td>
+    <td><%= link_to 'Destroy', notification_mode, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Notification mode', new_notification_mode_path %>

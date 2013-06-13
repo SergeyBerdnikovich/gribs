@@ -1,0 +1,2 @@
+class ItemidsController < ApplicationController
+end

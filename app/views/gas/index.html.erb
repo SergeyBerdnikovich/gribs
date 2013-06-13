@@ -1,0 +1,27 @@
+<h1>Listing gas</h1>
+
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Date update</th>
+    <th>Qty</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gas.each do |ga| %>
+  <tr>
+    <td><%= ga.product_id %></td>
+    <td><%= ga.date_update %></td>
+    <td><%= ga.qty %></td>
+    <td><%= link_to 'Show', ga %></td>
+    <td><%= link_to 'Edit', edit_ga_path(ga) %></td>
+    <td><%= link_to 'Destroy', ga, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Ga', new_ga_path %>

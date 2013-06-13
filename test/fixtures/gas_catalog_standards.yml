@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  item_id: MyString
+  manufacturer_item_id: MyString
+  upc_or_ean_id: MyString
+  manufacturer: MyString
+  product_name: MyString
+  short_description: MyString
+  extended_description: 
+  msrp: MyString
+  stock_status: MyString
+
+two:
+  item_id: MyString
+  manufacturer_item_id: MyString
+  upc_or_ean_id: MyString
+  manufacturer: MyString
+  product_name: MyString
+  short_description: MyString
+  extended_description: 
+  msrp: MyString
+  stock_status: MyString

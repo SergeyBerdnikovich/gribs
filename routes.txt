@@ -1,0 +1,177 @@
+                       static_page_welcome GET        /static_pages/:static_page_id/welcome(.:format)       static_pages#welcome
+                              static_pages GET        /static_pages(.:format)                               static_pages#index
+                                           POST       /static_pages(.:format)                               static_pages#create
+                           new_static_page GET        /static_pages/new(.:format)                           static_pages#new
+                          edit_static_page GET        /static_pages/:id/edit(.:format)                      static_pages#edit
+                               static_page GET        /static_pages/:id(.:format)                           static_pages#show
+                                           PUT        /static_pages/:id(.:format)                           static_pages#update
+                                           DELETE     /static_pages/:id(.:format)                           static_pages#destroy
+                         reports_mashrooms            /reports/mashrooms(.:format)                          reports#mushrooms
+                          new_user_session GET        /users/sign_in(.:format)                              devise/sessions#new
+                              user_session POST       /users/sign_in(.:format)                              devise/sessions#create
+                      destroy_user_session DELETE     /users/sign_out(.:format)                             devise/sessions#destroy
+                             user_password POST       /users/password(.:format)                             devise/passwords#create
+                         new_user_password GET        /users/password/new(.:format)                         devise/passwords#new
+                        edit_user_password GET        /users/password/edit(.:format)                        devise/passwords#edit
+                                           PUT        /users/password(.:format)                             devise/passwords#update
+                        notification_modes GET        /notification_modes(.:format)                         notification_modes#index
+                                           POST       /notification_modes(.:format)                         notification_modes#create
+                     new_notification_mode GET        /notification_modes/new(.:format)                     notification_modes#new
+                    edit_notification_mode GET        /notification_modes/:id/edit(.:format)                notification_modes#edit
+                         notification_mode GET        /notification_modes/:id(.:format)                     notification_modes#show
+                                           PUT        /notification_modes/:id(.:format)                     notification_modes#update
+                                           DELETE     /notification_modes/:id(.:format)                     notification_modes#destroy
+                             notifications GET        /notifications(.:format)                              notifications#index
+                                           POST       /notifications(.:format)                              notifications#create
+                          new_notification GET        /notifications/new(.:format)                          notifications#new
+                         edit_notification GET        /notifications/:id/edit(.:format)                     notifications#edit
+                              notification GET        /notifications/:id(.:format)                          notifications#show
+                                           PUT        /notifications/:id(.:format)                          notifications#update
+                                           DELETE     /notifications/:id(.:format)                          notifications#destroy
+                   gas_inventory_standards GET        /gas_inventory_standards(.:format)                    gas_inventory_standards#index
+                                           POST       /gas_inventory_standards(.:format)                    gas_inventory_standards#create
+                new_gas_inventory_standard GET        /gas_inventory_standards/new(.:format)                gas_inventory_standards#new
+               edit_gas_inventory_standard GET        /gas_inventory_standards/:id/edit(.:format)           gas_inventory_standards#edit
+                    gas_inventory_standard GET        /gas_inventory_standards/:id(.:format)                gas_inventory_standards#show
+                                           PUT        /gas_inventory_standards/:id(.:format)                gas_inventory_standards#update
+                                           DELETE     /gas_inventory_standards/:id(.:format)                gas_inventory_standards#destroy
+                     gas_catalog_standards GET        /gas_catalog_standards(.:format)                      gas_catalog_standards#index
+                                           POST       /gas_catalog_standards(.:format)                      gas_catalog_standards#create
+                  new_gas_catalog_standard GET        /gas_catalog_standards/new(.:format)                  gas_catalog_standards#new
+                 edit_gas_catalog_standard GET        /gas_catalog_standards/:id/edit(.:format)             gas_catalog_standards#edit
+                      gas_catalog_standard GET        /gas_catalog_standards/:id(.:format)                  gas_catalog_standards#show
+                                           PUT        /gas_catalog_standards/:id(.:format)                  gas_catalog_standards#update
+                                           DELETE     /gas_catalog_standards/:id(.:format)                  gas_catalog_standards#destroy
+                                       gas GET        /gas(.:format)                                        gas#index
+                                           POST       /gas(.:format)                                        gas#create
+                                    new_ga GET        /gas/new(.:format)                                    gas#new
+                                   edit_ga GET        /gas/:id/edit(.:format)                               gas#edit
+                                        ga GET        /gas/:id(.:format)                                    gas#show
+                                           PUT        /gas/:id(.:format)                                    gas#update
+                                           DELETE     /gas/:id(.:format)                                    gas#destroy
+                             manufacturers GET        /manufacturers(.:format)                              manufacturers#index
+                                           POST       /manufacturers(.:format)                              manufacturers#create
+                          new_manufacturer GET        /manufacturers/new(.:format)                          manufacturers#new
+                         edit_manufacturer GET        /manufacturers/:id/edit(.:format)                     manufacturers#edit
+                              manufacturer GET        /manufacturers/:id(.:format)                          manufacturers#show
+                                           PUT        /manufacturers/:id(.:format)                          manufacturers#update
+                                           DELETE     /manufacturers/:id(.:format)                          manufacturers#destroy
+                                quantities GET        /quantities(.:format)                                 quantities#index
+                                           POST       /quantities(.:format)                                 quantities#create
+                              new_quantity GET        /quantities/new(.:format)                             quantities#new
+                             edit_quantity GET        /quantities/:id/edit(.:format)                        quantities#edit
+                                  quantity GET        /quantities/:id(.:format)                             quantities#show
+                                           PUT        /quantities/:id(.:format)                             quantities#update
+                                           DELETE     /quantities/:id(.:format)                             quantities#destroy
+                                     items GET        /items(.:format)                                      items#index
+                                           POST       /items(.:format)                                      items#create
+                                  new_item GET        /items/new(.:format)                                  items#new
+                                 edit_item GET        /items/:id/edit(.:format)                             items#edit
+                                      item GET        /items/:id(.:format)                                  items#show
+                                           PUT        /items/:id(.:format)                                  items#update
+                                           DELETE     /items/:id(.:format)                                  items#destroy
+                                   itemids GET        /itemids(.:format)                                    itemids#index
+                                           POST       /itemids(.:format)                                    itemids#create
+                                new_itemid GET        /itemids/new(.:format)                                itemids#new
+                               edit_itemid GET        /itemids/:id/edit(.:format)                           itemids#edit
+                                    itemid GET        /itemids/:id(.:format)                                itemids#show
+                                           PUT        /itemids/:id(.:format)                                itemids#update
+                                           DELETE     /itemids/:id(.:format)                                itemids#destroy
+                                      root            /                                                     static_pages#welcome
+                    new_admin_user_session GET        /admin/login(.:format)                                active_admin/devise/sessions#new
+                        admin_user_session POST       /admin/login(.:format)                                active_admin/devise/sessions#create
+                destroy_admin_user_session DELETE|GET /admin/logout(.:format)                               active_admin/devise/sessions#destroy
+                       admin_user_password POST       /admin/password(.:format)                             active_admin/devise/passwords#create
+                   new_admin_user_password GET        /admin/password/new(.:format)                         active_admin/devise/passwords#new
+                  edit_admin_user_password GET        /admin/password/edit(.:format)                        active_admin/devise/passwords#edit
+                                           PUT        /admin/password(.:format)                             active_admin/devise/passwords#update
+                                admin_root            /admin(.:format)                                      admin/dashboard#index
+                                      root            /                                                     dashboard#index
+          batch_action_admin_notifications POST       /admin/notifications/batch_action(.:format)           admin/notifications#batch_action
+                       admin_notifications GET        /admin/notifications(.:format)                        admin/notifications#index
+                                           POST       /admin/notifications(.:format)                        admin/notifications#create
+                    new_admin_notification GET        /admin/notifications/new(.:format)                    admin/notifications#new
+                   edit_admin_notification GET        /admin/notifications/:id/edit(.:format)               admin/notifications#edit
+                        admin_notification GET        /admin/notifications/:id(.:format)                    admin/notifications#show
+                                           PUT        /admin/notifications/:id(.:format)                    admin/notifications#update
+                                           DELETE     /admin/notifications/:id(.:format)                    admin/notifications#destroy
+                    batch_action_admin_gas POST       /admin/gas/batch_action(.:format)                     admin/gas#batch_action
+                                 admin_gas GET        /admin/gas(.:format)                                  admin/gas#index
+                                           POST       /admin/gas(.:format)                                  admin/gas#create
+                              new_admin_ga GET        /admin/gas/new(.:format)                              admin/gas#new
+                             edit_admin_ga GET        /admin/gas/:id/edit(.:format)                         admin/gas#edit
+                                  admin_ga GET        /admin/gas/:id(.:format)                              admin/gas#show
+                                           PUT        /admin/gas/:id(.:format)                              admin/gas#update
+                                           DELETE     /admin/gas/:id(.:format)                              admin/gas#destroy
+  batch_action_admin_gas_catalog_standards POST       /admin/gas_catalog_standards/batch_action(.:format)   admin/gas_catalog_standards#batch_action
+               admin_gas_catalog_standards GET        /admin/gas_catalog_standards(.:format)                admin/gas_catalog_standards#index
+                                           POST       /admin/gas_catalog_standards(.:format)                admin/gas_catalog_standards#create
+            new_admin_gas_catalog_standard GET        /admin/gas_catalog_standards/new(.:format)            admin/gas_catalog_standards#new
+           edit_admin_gas_catalog_standard GET        /admin/gas_catalog_standards/:id/edit(.:format)       admin/gas_catalog_standards#edit
+                admin_gas_catalog_standard GET        /admin/gas_catalog_standards/:id(.:format)            admin/gas_catalog_standards#show
+                                           PUT        /admin/gas_catalog_standards/:id(.:format)            admin/gas_catalog_standards#update
+                                           DELETE     /admin/gas_catalog_standards/:id(.:format)            admin/gas_catalog_standards#destroy
+     batch_action_admin_notification_modes POST       /admin/notification_modes/batch_action(.:format)      admin/notification_modes#batch_action
+                  admin_notification_modes GET        /admin/notification_modes(.:format)                   admin/notification_modes#index
+                                           POST       /admin/notification_modes(.:format)                   admin/notification_modes#create
+               new_admin_notification_mode GET        /admin/notification_modes/new(.:format)               admin/notification_modes#new
+              edit_admin_notification_mode GET        /admin/notification_modes/:id/edit(.:format)          admin/notification_modes#edit
+                   admin_notification_mode GET        /admin/notification_modes/:id(.:format)               admin/notification_modes#show
+                                           PUT        /admin/notification_modes/:id(.:format)               admin/notification_modes#update
+                                           DELETE     /admin/notification_modes/:id(.:format)               admin/notification_modes#destroy
+          batch_action_admin_manufacturers POST       /admin/manufacturers/batch_action(.:format)           admin/manufacturers#batch_action
+                       admin_manufacturers GET        /admin/manufacturers(.:format)                        admin/manufacturers#index
+                                           POST       /admin/manufacturers(.:format)                        admin/manufacturers#create
+                    new_admin_manufacturer GET        /admin/manufacturers/new(.:format)                    admin/manufacturers#new
+                   edit_admin_manufacturer GET        /admin/manufacturers/:id/edit(.:format)               admin/manufacturers#edit
+                        admin_manufacturer GET        /admin/manufacturers/:id(.:format)                    admin/manufacturers#show
+                                           PUT        /admin/manufacturers/:id(.:format)                    admin/manufacturers#update
+                                           DELETE     /admin/manufacturers/:id(.:format)                    admin/manufacturers#destroy
+               batch_action_admin_products POST       /admin/products/batch_action(.:format)                admin/products#batch_action
+                            admin_products GET        /admin/products(.:format)                             admin/products#index
+                                           POST       /admin/products(.:format)                             admin/products#create
+                         new_admin_product GET        /admin/products/new(.:format)                         admin/products#new
+                        edit_admin_product GET        /admin/products/:id/edit(.:format)                    admin/products#edit
+                             admin_product GET        /admin/products/:id(.:format)                         admin/products#show
+                                           PUT        /admin/products/:id(.:format)                         admin/products#update
+                                           DELETE     /admin/products/:id(.:format)                         admin/products#destroy
+           batch_action_admin_static_pages POST       /admin/static_pages/batch_action(.:format)            admin/static_pages#batch_action
+                        admin_static_pages GET        /admin/static_pages(.:format)                         admin/static_pages#index
+                                           POST       /admin/static_pages(.:format)                         admin/static_pages#create
+                     new_admin_static_page GET        /admin/static_pages/new(.:format)                     admin/static_pages#new
+                    edit_admin_static_page GET        /admin/static_pages/:id/edit(.:format)                admin/static_pages#edit
+                         admin_static_page GET        /admin/static_pages/:id(.:format)                     admin/static_pages#show
+                                           PUT        /admin/static_pages/:id(.:format)                     admin/static_pages#update
+                                           DELETE     /admin/static_pages/:id(.:format)                     admin/static_pages#destroy
+batch_action_admin_gas_inventory_standards POST       /admin/gas_inventory_standards/batch_action(.:format) admin/gas_inventory_standards#batch_action
+             admin_gas_inventory_standards GET        /admin/gas_inventory_standards(.:format)              admin/gas_inventory_standards#index
+                                           POST       /admin/gas_inventory_standards(.:format)              admin/gas_inventory_standards#create
+          new_admin_gas_inventory_standard GET        /admin/gas_inventory_standards/new(.:format)          admin/gas_inventory_standards#new
+         edit_admin_gas_inventory_standard GET        /admin/gas_inventory_standards/:id/edit(.:format)     admin/gas_inventory_standards#edit
+              admin_gas_inventory_standard GET        /admin/gas_inventory_standards/:id(.:format)          admin/gas_inventory_standards#show
+                                           PUT        /admin/gas_inventory_standards/:id(.:format)          admin/gas_inventory_standards#update
+                                           DELETE     /admin/gas_inventory_standards/:id(.:format)          admin/gas_inventory_standards#destroy
+                           admin_dashboard            /admin/dashboard(.:format)                            admin/dashboard#index
+            batch_action_admin_admin_users POST       /admin/admin_users/batch_action(.:format)             admin/admin_users#batch_action
+                         admin_admin_users GET        /admin/admin_users(.:format)                          admin/admin_users#index
+                                           POST       /admin/admin_users(.:format)                          admin/admin_users#create
+                      new_admin_admin_user GET        /admin/admin_users/new(.:format)                      admin/admin_users#new
+                     edit_admin_admin_user GET        /admin/admin_users/:id/edit(.:format)                 admin/admin_users#edit
+                          admin_admin_user GET        /admin/admin_users/:id(.:format)                      admin/admin_users#show
+                                           PUT        /admin/admin_users/:id(.:format)                      admin/admin_users#update
+                                           DELETE     /admin/admin_users/:id(.:format)                      admin/admin_users#destroy
+               batch_action_admin_comments POST       /admin/comments/batch_action(.:format)                admin/comments#batch_action
+                            admin_comments GET        /admin/comments(.:format)                             admin/comments#index
+                                           POST       /admin/comments(.:format)                             admin/comments#create
+                             admin_comment GET        /admin/comments/:id(.:format)                         admin/comments#show
+                     batch_action_comments POST       /comments/batch_action(.:format)                      comments#batch_action
+                                  comments GET        /comments(.:format)                                   comments#index
+                                           POST       /comments(.:format)                                   comments#create
+                                   comment GET        /comments/:id(.:format)                               comments#show
+                                  products GET        /products(.:format)                                   products#index
+                                           POST       /products(.:format)                                   products#create
+                               new_product GET        /products/new(.:format)                               products#new
+                              edit_product GET        /products/:id/edit(.:format)                          products#edit
+                                   product GET        /products/:id(.:format)                               products#show
+                                           PUT        /products/:id(.:format)                               products#update
+                                           DELETE     /products/:id(.:format)                               products#destroy

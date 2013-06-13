@@ -6,18 +6,24 @@ gem 'rails', '3.2.13'
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
   gem 'mysql2'
+  gem 'devise'
   gem 'sqlite3'
-  gem 'activeadmin'
-  gem 'bootstrap-datetimepicker-rails'
+  gem "activeadmin", github: "gregbell/active_admin"
+  gem 'twitter-bootstrap-rails'
+    gem 'sass-rails',   '~> 3.2.3'  
+  gem "friendly_id"
 
+  gem 'bootstrap-datepicker-rails'
+  gem 'will_paginate-bootstrap'
+  gem 'will_paginate'
+  
   gem "meta_search",    '>= 1.1.0.pre'
 
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.2.3'
+gem 'jquery-ui-rails'
   gem 'coffee-rails', '~> 3.2.1'
-
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 

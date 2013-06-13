@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  trashhold_notification: false
+  trashhold: 1
+  start_qty_notification: false
+  start_qty: 1
+  emails: MyString
+
+two:
+  trashhold_notification: false
+  trashhold: 1
+  start_qty_notification: false
+  start_qty: 1
+  emails: MyString

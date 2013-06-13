@@ -1,0 +1,29 @@
+<h1>Listing gas_inventory_standards</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Qty available</th>
+    <th>Stock status</th>
+    <th>Active status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gas_inventory_standards.each do |gas_inventory_standard| %>
+  <tr>
+    <td><%= gas_inventory_standard.item_id %></td>
+    <td><%= gas_inventory_standard.qty_available %></td>
+    <td><%= gas_inventory_standard.stock_status %></td>
+    <td><%= gas_inventory_standard.active_status %></td>
+    <td><%= link_to 'Show', gas_inventory_standard %></td>
+    <td><%= link_to 'Edit', edit_gas_inventory_standard_path(gas_inventory_standard) %></td>
+    <td><%= link_to 'Destroy', gas_inventory_standard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gas inventory standard', new_gas_inventory_standard_path %>

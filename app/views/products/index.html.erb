@@ -1,73 +1,45 @@
-<div id='table'>
-  <table class='table table-striped'>
-    <thead>
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:item_id) %></th>
+      <th><%= model_class.human_attribute_name(:manufacturer_item_id) %></th>
+      <th><%= model_class.human_attribute_name(:upc_or_ean_id) %></th>
+      <th><%= model_class.human_attribute_name(:manufacturer_id) %></th>
+      <th><%= model_class.human_attribute_name(:product_name) %></th>
+      <th><%= model_class.human_attribute_name(:short_description) %></th>
+      <th><%= model_class.human_attribute_name(:extended_description) %></th>
+      <th><%= model_class.human_attribute_name(:images) %></th>
+      <th><%= model_class.human_attribute_name(:weight) %></th>
+      <th><%= model_class.human_attribute_name(:length) %></th>
+      <th><%= model_class.human_attribute_name(:width) %></th>
+      <th><%= model_class.human_attribute_name(:height) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @products.each do |product| %>
       <tr>
-        <th>Item SKU</th>
-        <th>Item UPC</th>
-        <th>Item Name</th>
-        <th>Item Brand</th>
-        <th>Percent</th>
+        <td><%= link_to product.id, product_path(product) %></td>
+        <td><%= product.item_id %></td>
+        <td><%= product.manufacturer_item_id %></td>
+        <td><%= product.upc_or_ean_id %></td>
+        <td><%= product.manufacturer_id %></td>
+        <td><%= product.product_name %></td>
+        <td><%= product.short_description %></td>
+        <td><%= product.extended_description %></td>
+        <td><%= product.images %></td>
+        <td><%= product.weight %></td>
+        <td><%= product.length %></td>
+        <td><%= product.width %></td>
+        <td><%= product.height %></td>
+          
       </tr>
-    </thead>
-    <tbody>
-      <% @products.each do |item_id, products| %>
-        <tr>
-          <td><%= products[0][0] %></td>
-          <td><%= products[0][1] %></td>
-          <td><%= products[0][2] %></td>
-          <td><%= products[0][3] %></td>
-          <td>
-            <%= products[0][5] %>%
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-
-<hr />
-<div id='filter_zone'>
-  <div id='filter'>
-    <%= form_tag products_path, :method => :get do %>
-      <span>Period:</span>
-      <div id="datetimepicker" class="input-append">
-        <%= text_field_tag 'period_start', params[:period_start] %>
-        <span class="add-on">
-          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-          </i>
-        </span>
-      </div>
-       -
-       <div id="datetimepicker1" class="input-append">
-        <%= text_field_tag 'period_end', params[:period_end] %>
-        <span class="add-on">
-          <i data-time-icon="icon-time" data-date-icon="icon-calendar">
-          </i>
-        </span>
-      </div>
-      <div id='percent_threshold'>
-        Percent Threshold:
-        <%= text_field_tag 'percent_threshold', params[:percent_threshold] %>
-      </div>
-
-      <script type="text/javascript">
-        $(function() {
-          $('#datetimepicker').datetimepicker({
-            format: 'yyyy/MM/dd',
-            pickTime: false
-          });
-          $('#datetimepicker1').datetimepicker({
-            format: 'yyyy/MM/dd',
-            pickTime: false
-          });
-        });
-      </script>
-
-      <%= submit_tag 'Refresh', :id => 'refresh', :class => 'btn' %>
     <% end %>
-  </div>
-</div>
-<hr />
-<div id='download_links'>
-  Download: <%= link_to 'CSV', '#' %>, <%= link_to 'XML', '#' %>, <%= link_to 'JSON', '#' %>
-</div>
+  </tbody>
+</table>
+
+<%= will_paginate @products, renderer: BootstrapPagination::Rails %>

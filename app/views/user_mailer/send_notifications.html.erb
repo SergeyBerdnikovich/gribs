@@ -1,0 +1,32 @@
+<div id='table'>
+  <table class='table table-striped'>
+    <thead>
+      <tr>
+        <th>Item SKU</th>
+        <th>Item UPC</th>
+        <th>Item Name</th>
+        <th>Item Brand</th>
+        <th>Begin Qty</th>
+        <th>End Qty</th>
+        <th>Percent</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @products.each do |key, products| %>
+        <% if products[5] != nil  %>
+
+        <tr>
+          <td><%= products[0] %></td>
+          <td><%= products[1] %></td>
+          <td><%= products[2] %></td>
+          <td><%= products[3] %></td>
+          <td><%= products[8] %></td>
+          <td><%= products[9] %></td>
+          <td><%= products[5] %>%</td>
+        </tr>
+         <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>

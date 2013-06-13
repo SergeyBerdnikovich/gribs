@@ -1,0 +1,39 @@
+<h1>Listing gas_catalog_standards</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Manufacturer item</th>
+    <th>Upc or ean</th>
+    <th>Manufacturer</th>
+    <th>Product name</th>
+    <th>Short description</th>
+    <th>Extended description</th>
+    <th>Msrp</th>
+    <th>Stock status</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gas_catalog_standards.each do |gas_catalog_standard| %>
+  <tr>
+    <td><%= gas_catalog_standard.item_id %></td>
+    <td><%= gas_catalog_standard.manufacturer_item_id %></td>
+    <td><%= gas_catalog_standard.upc_or_ean_id %></td>
+    <td><%= gas_catalog_standard.manufacturer %></td>
+    <td><%= gas_catalog_standard.product_name %></td>
+    <td><%= gas_catalog_standard.short_description %></td>
+    <td><%= gas_catalog_standard.extended_description %></td>
+    <td><%= gas_catalog_standard.msrp %></td>
+    <td><%= gas_catalog_standard.stock_status %></td>
+    <td><%= link_to 'Show', gas_catalog_standard %></td>
+    <td><%= link_to 'Edit', edit_gas_catalog_standard_path(gas_catalog_standard) %></td>
+    <td><%= link_to 'Destroy', gas_catalog_standard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gas catalog standard', new_gas_catalog_standard_path %>
