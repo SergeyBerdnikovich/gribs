@@ -45,6 +45,7 @@ GEM
     activesupport (3.2.13)
       i18n (= 0.6.1)
       multi_json (~> 1.0)
+    addressable (2.3.4)
     arbre (1.0.1)
       activesupport (>= 3.0.0)
     arel (3.0.2)
@@ -62,12 +63,25 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    cookiejar (0.3.0)
     devise (2.2.4)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
       railties (~> 3.1)
       warden (~> 1.2.1)
+    em-http-request (1.0.3)
+      addressable (>= 2.2.3)
+      cookiejar
+      em-socksify
+      eventmachine (>= 1.0.0.beta.4)
+      http_parser.rb (>= 0.5.3)
+    em-socksify (0.2.1)
+      eventmachine (>= 1.0.0.beta.4)
+    em_mysql2_connection_pool (0.0.5)
+      eventmachine
+      mysql2
     erubis (2.7.0)
+    eventmachine (1.0.3)
     execjs (1.4.0)
       multi_json (~> 1.0)
     fastercsv (1.5.5)
@@ -76,6 +90,7 @@ GEM
     friendly_id (4.0.9)
     has_scope (0.5.1)
     hike (1.2.3)
+    http_parser.rb (0.5.3)
     i18n (0.6.1)
     inherited_resources (1.4.0)
       has_scope (~> 0.5.0)
@@ -172,6 +187,9 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   coffee-rails (~> 3.2.1)
   devise
+  em-http-request
+  em_mysql2_connection_pool
+  eventmachine
   friendly_id
   jquery-rails
   jquery-ui-rails

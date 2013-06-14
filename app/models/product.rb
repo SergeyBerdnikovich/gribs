@@ -45,7 +45,7 @@ class Product < ActiveRecord::Base
     if begin_qty == nil
       begin_qty = 0
     end
-    
+
       cost = cost.to_i if cost != nil
       cost = 0 if cost == nil
 
@@ -104,6 +104,7 @@ class Product < ActiveRecord::Base
         product[2] = @tp.product_name
         product[3] = @tp.manufacturer.name
         product[10] = '%.0f' % @tp.cost
+        product[11] = @tp.id
       else
         prodarr.delete(k)
       end

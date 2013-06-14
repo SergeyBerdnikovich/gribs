@@ -28,7 +28,7 @@
         <td><%= product.manufacturer_item_id %></td>
         <td><%= product.upc_or_ean_id %></td>
         <td><%= product.manufacturer_id %></td>
-        <td><%= product.product_name %></td>
+        <td><%= link_to product.product_name, product %></td>
         <td><%= product.short_description %></td>
         <td><%= product.extended_description %></td>
         <td><%= product.images %></td>
@@ -36,7 +36,7 @@
         <td><%= product.length %></td>
         <td><%= product.width %></td>
         <td><%= product.height %></td>
-          
+
       </tr>
     <% end %>
   </tbody>

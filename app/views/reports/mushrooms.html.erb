@@ -3,12 +3,12 @@
   <div id='filter'>
     <%= form_tag reports_mashrooms_path, :method => :get do %>
       <span>First date:</span>
-      
+
         <%= text_field_tag 'period_start', params[:period_start], :class => 'datepicker' %>
        <br>
        <span>Second date:</span>
         <%= text_field_tag 'period_end', params[:period_end], :class => 'datepicker' %>
-       
+
       <div id='begin_qty'>
         Beginning Quantity:
         <%= text_field_tag 'begin_qty', params[:begin_qty] %>
@@ -65,14 +65,14 @@
         <tr>
           <td><%= products[0] %></td>
           <td><%= products[1] %></td>
-          <td><%= products[2] %></td>
+          <td><%= link_to products[2], product_path(products[11]) %></td>
           <td><%= products[3] %></td>
           <td><%= products[8] %></td>
           <td><%= products[9] %></td>
           <td><%= products[5] %>%</td>
           <td><%= products[10] %></td>
           <% if params[:debug] %>
-          <td><%= products[7] %></td>
+            <td><%= products[7] %></td>
           <% end %>
         </tr>
          <% end %>
@@ -85,14 +85,14 @@
 <hr />
 <div id='download_links'>
   Download: <%= link_to 'CSV', reports_mashrooms_path(format: "csv", :period_start  => params[:period_start ], :period_end => params[:period_end], :begin_qty=>params[:begin_qty], :percent_threshold => params[:percent_threshold] ) %>, <%#=# link_to 'XML', products_path(format: "xls")  %>
-  
+
 </div>
 <p>
   <script>
   $('document').ready(function(){
 
   $('.datepicker').datepicker();
-    
+
   })
-  
+
   </script>

@@ -10,14 +10,18 @@ gem 'rails', '3.2.13'
   gem 'sqlite3'
   gem "activeadmin", github: "gregbell/active_admin"
   gem 'twitter-bootstrap-rails'
-    gem 'sass-rails',   '~> 3.2.3'  
+    gem 'sass-rails',   '~> 3.2.3'
   gem "friendly_id"
 
   gem 'bootstrap-datepicker-rails'
   gem 'will_paginate-bootstrap'
   gem 'will_paginate'
-  
+
   gem "meta_search",    '>= 1.1.0.pre'
+
+  gem 'eventmachine'
+  gem 'em-http-request'
+  gem 'em_mysql2_connection_pool'
 
 # Gems used only for assets and not required
 # in production environments by default.
