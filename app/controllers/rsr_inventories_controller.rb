@@ -1,0 +1,2 @@
+class RsrInventoriesController < ApplicationController
+end

@@ -1,6 +1,9 @@
 <div id='filter_zone'>
   <div id='filter'>
     <%= form_tag reports_mashrooms_path, :method => :get do %>
+      <span>Choose supplier:</span>
+      <%= select_tag "source_id", options_from_collection_for_select(Source.all, "id", "name"), :include_blank => false %><br>
+
       <span>First date:</span>
 
         <%= text_field_tag 'period_start', params[:period_start], :class => 'datepicker' %>
