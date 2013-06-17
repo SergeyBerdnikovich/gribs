@@ -1,5 +1,11 @@
 Griby::Application.routes.draw do
 
+  resources :sources
+
+
+  resources :rsr_inventories
+
+
   resources :gas_cost_standards
 
 

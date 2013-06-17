@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611130753) do
+ActiveRecord::Schema.define(:version => 20130617145004) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -143,6 +143,7 @@ ActiveRecord::Schema.define(:version => 20130611130753) do
     t.datetime "created_at",           :null => false
     t.datetime "updated_at",           :null => false
     t.float    "cost"
+    t.integer  "source_id"
   end
 
   add_index "products", ["item_id"], :name => "index_products_on_item_id"
@@ -158,6 +159,43 @@ ActiveRecord::Schema.define(:version => 20130611130753) do
   add_index "quantities", ["date"], :name => "index_quantities_on_date"
   add_index "quantities", ["item_id"], :name => "index_quantities_on_item_id"
   add_index "quantities", ["qty"], :name => "index_quantities_on_qty"
+
+  create_table "rsr", :force => true do |t|
+    t.integer "product_id"
+    t.integer "date"
+    t.integer "qty"
+  end
+
+  add_index "rsr", ["date"], :name => "index_rsr_on_date"
+  add_index "rsr", ["product_id"], :name => "index_rsr_on_product_id"
+  add_index "rsr", ["qty"], :name => "index_rsr_on_qty"
+
+  create_table "rsr_inventories", :force => true do |t|
+    t.string   "RSRStockNumber"
+    t.string   "UPCCode"
+    t.string   "ProductDescription"
+    t.integer  "DepartmentNumber"
+    t.string   "ManufacturerId"
+    t.float    "RetailPrice"
+    t.float    "RSRRegularPrice"
+    t.float    "ProductWeight"
+    t.integer  "InventoryQuantity"
+    t.string   "Model"
+    t.string   "FullManufacturerName"
+    t.string   "ManufacturerPartNumber"
+    t.string   "AllocatedCloseoutDeleted"
+    t.text     "ExpandedProductDescription"
+    t.text     "Imagename"
+    t.datetime "created_at",                 :null => false
+    t.datetime "updated_at",                 :null => false
+  end
+
+  create_table "sources", :force => true do |t|
+    t.string   "name"
+    t.string   "db_name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "static_pages", :force => true do |t|
     t.string   "name"

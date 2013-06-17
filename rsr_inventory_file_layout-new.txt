@@ -1,0 +1,15 @@
+RSRStockNumber:string
+UPCCode
+ProductDescription
+DepartmentNumber:integer
+ManufacturerId
+RetailPrice:float
+RSRRegularPrice:float
+ProductWeight:float
+InventoryQuantity:integer
+Model:string
+FullManufacturerName:string
+ManufacturerPartNumber:string
+AllocatedCloseoutDeleted:string
+ExpandedProductDescription:text
+Image name:text

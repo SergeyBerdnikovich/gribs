@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  RSRStockNumber: MyString
+  UPCCode: MyString
+  ProductDescription: MyString
+  DepartmentNumber: 1
+  ManufacturerId: MyString
+  RetailPrice: 1.5
+  RSRRegularPrice: 1.5
+  ProductWeight: 1.5
+  InventoryQuantity: 1
+  Model: MyString
+  FullManufacturerName: MyString
+  ManufacturerPartNumber: MyString
+  AllocatedCloseoutDeleted: MyString
+  ExpandedProductDescription: MyText
+  Imagename: MyText
+
+two:
+  RSRStockNumber: MyString
+  UPCCode: MyString
+  ProductDescription: MyString
+  DepartmentNumber: 1
+  ManufacturerId: MyString
+  RetailPrice: 1.5
+  RSRRegularPrice: 1.5
+  ProductWeight: 1.5
+  InventoryQuantity: 1
+  Model: MyString
+  FullManufacturerName: MyString
+  ManufacturerPartNumber: MyString
+  AllocatedCloseoutDeleted: MyString
+  ExpandedProductDescription: MyText
+  Imagename: MyText
