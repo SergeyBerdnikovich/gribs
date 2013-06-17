@@ -261,29 +261,24 @@
             </button>
             <a class="brand" href="/">Marketing research</a>
             <!-- Responsive Navbar Part 2: Place all navbar contents you want collapsed withing .navbar-collapse.collapse. -->
-            <!-- <div class="nav-collapse collapse">
-              <ul class="nav">
-                <li ><%#= link_to "Products", products_path() %></li>
-                <li><a href="<%#= link_to_page("about") %>">About</a></li>
-                <li><a href="<%#= link_to_page("contacts") %>">Contact</a></li>
-                <%# if current_user %>
-                  <li><%#= link_to 'Log Out', destroy_user_session_path, :method => :delete %></li>
-                <%# else %>
-                  <li><%#= link_to 'Log In', new_user_session_path %></li>
-                <%# end %>
-                Read about Bootstrap dropdowns at http://twitter.github.com/bootstrap/javascript.html#dropdowns
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="<%#= reports_mashrooms_path() %>">Mushrooms</a></li>
-                    <li class="divider"></li>
-                    <li class="nav-header">Nav header</li>
-                    <li><a href="#">Separated link</a></li>
-                    <li><a href="#">One more separated link</a></li>
-                  </ul>
-                </li>
+            <div class="nav-collapse collapse">
+              <ul class="nav" style='float:right'>
+                <!-- <li ><%#= link_to "Products", products_path() %></li> -->
+                <!-- <li><a href="<%#= link_to_page("about") %>">About</a></li>
+                <li><a href="<%#= link_to_page("contacts") %>">Contact</a></li> -->
+                <% if current_user %>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="<%= reports_mashrooms_path() %>">Mushrooms</a></li>
+                    </ul>
+                  </li>
+                  <li><%= link_to 'Log Out', destroy_user_session_path, :method => :delete %></li>
+                <% else %>
+                  <li><%= link_to 'Log In', new_user_session_path %></li>
+                <% end %>
               </ul>
-            </div> --><!--/.nav-collapse -->
+            </div><!--/.nav-collapse
           </div><!-- /.navbar-inner -->
         </div><!-- /.navbar -->
       </div> <!-- /.container -->
@@ -353,8 +348,10 @@
     <script src="/assets/maket/bootstrap-collapse.js"></script>
     <script src="/assets/maket/bootstrap-carousel.js"></script>
     <script src="/assets/maket/bootstrap-typeahead.js"></script> -->
-    <script src="/assets/maket/jquery.js"></script>
-    <script src="/assets/bootstrap.js"></script>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+
     <script type="text/javascript" >
       $(document).ready(function() {
         $('#myCarousel').carousel();
