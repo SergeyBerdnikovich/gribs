@@ -2,6 +2,7 @@ class StaticPagesController < InheritedResources::Base
 	layout :resolve_layout
 
   def welcome
+    redirect_to reports_mashrooms_path and return nil if current_user
 	end
 
   private
