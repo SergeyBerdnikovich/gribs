@@ -1,7 +1,8 @@
 class Product < ActiveRecord::Base
   attr_accessible :extended_description, :height, :images, :item_id, :length, :manufacturer, :manufacturer_item_id, :product_name, :short_description, :upc_or_ean_id, :weight, :width
 
-  has_one :gas
+  has_many :gass
+  has_many :rsr
   belongs_to :manufacturer
 
   search_methods :upc_or_ean_id_contains, :upc_or_ean_id_starts_with, :upc_or_ean_id_ends_with
