@@ -24,13 +24,12 @@ def download_and_rename
 	   	ftp=Net::FTP.new
 		ftp.connect("ftp.rsrgroup.com","21")
 		ftp.login("rsrdealer","429Sg81")
-		ftp.chdir("standard")
+		#ftp.chdir("standard")
 		ftp.gettextfile("rsrinventory-new.txt","rsrinventory-new.txt")	
 
 		ftp.close
 	
 	
-
 
 	begin
 		File.rename("catalog_standard.txt", "catalog_standard_"+Time.now.strftime("%Y%m%d") +".txt")
@@ -56,8 +55,6 @@ def download_and_rename
 		p e.backtrace
 	end
 
-
-
 	ftp=Net::FTP.new
 	ftp.connect("71.6.90.37","21")
 	ftp.login("103779","weby331!")
@@ -66,6 +63,11 @@ def download_and_rename
 	ftp.gettextfile("cost_standard.csv","cost_standard.csv")
 	ftp.gettextfile("inventory_standard.csv","inventory_standard.csv")
 	ftp.close
+
+
+
+
+
 end
 
 

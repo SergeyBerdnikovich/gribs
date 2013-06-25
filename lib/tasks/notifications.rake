@@ -17,7 +17,7 @@ task :notifications => :environment do
 			end
 			if notify == true
 				p "processing notification"
-				products = Product.filter(Time.now.strftime("%Y%m%d"), yestrerday.strftime("%Y%m%d"), begin_qty , treshhold )
+				products = Product.filter(1,Time.now.strftime("%Y%m%d"), yestrerday.strftime("%Y%m%d"), begin_qty , treshhold )
 				notification.emails.split(/[,; ]/).each do |email|
 					p email
 					UserMailer.send_notifications(email, products, notification.notification_mode.name).deliver

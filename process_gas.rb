@@ -107,7 +107,7 @@ $sql.query("SELECT * FROM rsr_inventories").each do |rsr|
         $sql.query("DELETE FROM rsr_inventories WHERE id = #{rsr['id']}")   
     end
 
-    exit!
+
 
     $sql.query("SELECT * FROM gas_inventory_standards").each do |gas|
 

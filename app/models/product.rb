@@ -44,14 +44,16 @@ class Product < ActiveRecord::Base
   def self.filter(source_id,period_start, period_end, begin_qty, percent_threshold, cost = 0)
     if begin_qty == nil
       begin_qty = 0
+    else
+      begin_qty = begin_qty.to_i
     end
 
-      cost = cost.to_i if cost != nil
-      cost = 0 if cost == nil
+    cost = cost.to_i if cost != nil
+    cost = 0 if cost == nil
     @source = Source.find(source_id)
     percent_threshold = percent_threshold.to_f
     #products = Product.find_by_sql("SELECT item_id,manufacturer_item_id, upc_or_ean_id, product_name, manufacturer, qty_available, date FROM products WHERE (date = #{period_start} OR date = #{period_end}) AND qty_available>#{begin_qty} ORDER BY product_name")
-    products = Product.find_by_sql("SELECT product_id, qty, date FROM #{@source.db_name} WHERE (date = #{period_start} OR date = #{period_end}) AND qty > #{begin_qty}")
+    products = Product.find_by_sql("SELECT product_id, qty, date FROM #{@source.db_name} WHERE (date = #{period_start} OR date = #{period_end}) ")
     prodarr = Hash.new
     products.each do |product|
       qty_available = product.qty
@@ -93,26 +95,33 @@ class Product < ActiveRecord::Base
         end
       end
     end
-    prodarr.collect  do |k,product|
+    i = 0
+    retarr = Hash.new
+    prodarr.collect do |k,product|
       @tp = Product.find(product[0])
       #[product.manufacturer_product_id, product.upc_or_ean_id, product.product_name, product.manufacturer, qty_available,nil,product.date]
       #prodarr[product.product_id] = [product.product_id, nil, nil, nil, qty_available,nil,product.date]
       @tp.cost = 0 if @tp.cost == nil
-      if @tp.cost >=  cost  #implementing cost filter
-        product[0] = @tp.manufacturer_item_id
-        product[1] = @tp.upc_or_ean_id
-        product[2] = @tp.product_name
-        product[3] = @tp.manufacturer.name
-        product[10] = '%.0f' % @tp.cost
-        product[11] = @tp.id
-      else
-        prodarr.delete(k)
-      end
 
+
+      if product[8].to_i >= begin_qty #begin quantity filter
+        if @tp.cost >=  cost  #implementing cost filter
+          i += 1
+          # raise @tp.inspect if i == 2
+          product[0] = @tp.manufacturer_item_id
+          product[1] = @tp.upc_or_ean_id
+          product[2] = @tp.product_name
+          product[3] = @tp.manufacturer.name
+          product[10] = '%.0f' % @tp.cost
+          product[11] = @tp.id
+          #raise product.inspect.to_s if i == 2
+          retarr[k] = product
+        end
+      end
 
     end
 
-    return prodarr
+    return retarr
 
   end
 end

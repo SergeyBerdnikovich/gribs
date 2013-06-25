@@ -2,7 +2,7 @@
   <div id='filter'>
     <%= form_tag reports_mashrooms_path, :method => :get do %>
       <span>Choose supplier:</span>
-      <%= select_tag "source_id", options_from_collection_for_select(Source.all, "id", "name"), :include_blank => false %><br>
+      <%= select_tag "source_id", options_from_collection_for_select(Source.all, "id", "name", params[:source_id]), :include_blank => false %><br>
 
       <span>First date:</span>
 
@@ -65,7 +65,7 @@
         <tr>
           <td><%= products[0] %></td>
           <td><%= products[1] %></td>
-          <td><%= link_to products[2], product_path(products[11]) %></td>
+          <td><%= link_to products[2], product_path(products[11]) if products[11] %></td>
           <td><%= products[3] %></td>
           <td><%= products[8] %></td>
           <td><%= products[9] %></td>
