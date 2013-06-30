@@ -36,6 +36,7 @@ $sql = Mysql2::Client.new($sqlconf)
 def escape(text)
 
     return "" if text.nil?
+    return text if text.is_a? Integer
 
     return $sql.escape(text)
 
@@ -45,7 +46,18 @@ end
 def process_catalog
 
     $sql.query("SELECT * FROM gas_catalog_standards").each do |product|
-        check = $sql.query("SELECT id FROM products WHERE item_id = '#{product['item_id']}' AND source_id = 2").to_a
+        check = $sql.query("SELECT id FROM products WHERE item_id = '#{product['item_id']}' AND source_id = 1").to_a      
+
+        if check[0] != nil
+            if check[0]["category"] == nil
+                if product['categories'] != nil
+                    check = $sql.query("DELETE FROM products WHERE item_id = '#{product['item_id']}' AND source_id = 1").to_a       
+                    p "cat fixed" 
+                    p product
+                end
+
+            end
+        end
         if check.size == 0
             manufacturer_id = $sql.query("SELECT id FROM manufacturers WHERE name LIKE '#{escape(product['manufacturer'])}'").to_a
             if manufacturer_id.size == 0
@@ -53,16 +65,12 @@ def process_catalog
                 manufacturer_id = $sql.last_id
             else
                 manufacturer_id = manufacturer_id[0]["id"]
-            end
-            p manufacturer_id
+            end      
 
-            req = "INSERT INTO products (item_id, manufacturer_item_id, upc_or_ean_id, manufacturer_id, product_name, short_description, extended_description, images, weight, length, width, height,source_id) VALUES ('#{escape(product["item_id"])}', '#{escape(product["manufacturer_item_id"])}', '#{escape(product["upc_or_ean_id"])}', #{manufacturer_id}, '#{escape(product["product_name"])}', '#{escape(product["short_description"])}', '#{escape(product["extended_description"])}', '#{escape(product["images"])}', '#{product["weight"]}', '#{product["length"]}', '#{product["width"]}', '#{product["height"]}',1)"
+            req = "INSERT INTO products (item_id, manufacturer_item_id, upc_or_ean_id, manufacturer_id, product_name, short_description, extended_description, images, weight, length, width, height,source_id, category) VALUES ('#{escape(product["item_id"])}', '#{escape(product["manufacturer_item_id"])}', '#{escape(product["upc_or_ean_id"])}', #{manufacturer_id}, '#{escape(product["product_name"])}', '#{escape(product["short_description"])}', '#{escape(product["extended_description"])}', '#{escape(product["images"])}', '#{product["weight"]}', '#{product["length"]}', '#{product["width"]}', '#{product["height"]}',1,'#{escape(product["categories"])}')"
             t = $sql.query(req)
 
         end
-
-
-
     end
     $sql.query("DELETE FROM gas_catalog_standards ")
     $catalog_parsed = true
@@ -72,9 +80,21 @@ end
 
 def process_inventory(date = Time.now.strftime("%Y%m%d"))
 
-$sql.query("SELECT * FROM rsr_inventories").each do |rsr|
+    $sql.query("SELECT * FROM rsr_inventories").each do |rsr|
 
         product_id = $sql.query("SELECT id FROM products WHERE item_id = '#{rsr["RSRStockNumber"]}' AND source_id = 2").to_a
+
+            if product_id[0] != nil
+            if product_id[0]["category"] == nil
+                if rsr["DepartmentNumber"] != nil
+                    product_id = $sql.query("DELETE FROM products WHERE item_id = '#{rsr["RSRStockNumber"]}' AND source_id = 2").to_a       
+                    p "cat fixed" 
+                    p rsr
+                end
+
+            end
+        end
+
 
         if product_id.size == 0
             manufacturer_id = $sql.query("SELECT id FROM manufacturers WHERE name LIKE '#{escape(rsr['FullManufacturerName'])}'").to_a
@@ -83,10 +103,10 @@ $sql.query("SELECT * FROM rsr_inventories").each do |rsr|
                 manufacturer_id = $sql.last_id
             else
                 manufacturer_id = manufacturer_id[0]["id"]
-            end            
+            end
 
 
-           req = "INSERT INTO products (item_id, manufacturer_item_id, upc_or_ean_id, manufacturer_id, product_name, short_description, extended_description, images, weight, length, width, height, cost, source_id) VALUES ('#{escape(rsr["RSRStockNumber"])}', '#{escape(rsr["ManufacturerPartNumber"])}', '#{escape(rsr["UPCCode"])}', #{manufacturer_id}, '#{escape(rsr["Model"])}', '#{escape(rsr["ProductDescription"])}', '#{escape(rsr["ExpandedProductDescription"])}', '#{escape(rsr["Imagename"])}', '#{rsr["ProductWeight"]}', '0', '0', '0', '#{rsr["RetailPrice"]}',2)"
+            req = "INSERT INTO products (item_id, manufacturer_item_id, upc_or_ean_id, manufacturer_id, product_name, short_description, extended_description, images, weight, length, width, height, cost, source_id, category) VALUES ('#{escape(rsr["RSRStockNumber"])}', '#{escape(rsr["ManufacturerPartNumber"])}', '#{escape(rsr["UPCCode"])}', #{manufacturer_id}, '#{escape(rsr["Model"])}', '#{escape(rsr["ProductDescription"])}', '#{escape(rsr["ExpandedProductDescription"])}', '#{escape(rsr["Imagename"])}', '#{rsr["ProductWeight"]}', '0', '0', '0', '#{rsr["RetailPrice"]}',2,'#{escape(rsr["DepartmentNumber"])}')"
             t = $sql.query(req)
             product_id = $sql.last_id
         else
@@ -103,8 +123,8 @@ $sql.query("SELECT * FROM rsr_inventories").each do |rsr|
                 t = $sql.query(req)
 
             end
-        end 
-        $sql.query("DELETE FROM rsr_inventories WHERE id = #{rsr['id']}")   
+        end
+        $sql.query("DELETE FROM rsr_inventories WHERE id = #{rsr['id']}")
     end
 
 
@@ -133,7 +153,7 @@ $sql.query("SELECT * FROM rsr_inventories").each do |rsr|
                 t = $sql.query(req)
 
             end
-        end 
+        end
         $sql.query("DELETE FROM gas_inventory_standards WHERE id = #{gas['id']}")
     end
 
@@ -162,9 +182,12 @@ end
 
 EM.run do
 
-    download_and_rename
-    process_files
+   download_and_rename
+   process_files
+
     process_inventory
+
+  process_catalog
     exit!
     processing = false
     EM.add_periodic_timer(1) do

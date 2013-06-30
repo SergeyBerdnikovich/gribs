@@ -13,7 +13,10 @@ Griby::Application.routes.draw do
     get :welcome
   end
 
-  match "reports/mashrooms", to: "reports#mushrooms"
+  match "reports/mushrooms", to: "reports#mushrooms", :as => :reports_mashrooms
+  match "reports/mushrooms", to: "reports#mushrooms"
+  match "reports/days_drop", to: "reports#days_drop"
+
 
   devise_for :users, :skip => [:passwords, :registrations]
 

@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-	filter :upc_or_ean_id, :as => :string
+	filter :upc_or_ean_id, :as => :string, :label => "UPC or EAN ID"
 	filter :item_id, :as => :string , :label => "item id"
 	# 
 	filter :cost
@@ -16,6 +16,7 @@ ActiveAdmin.register Product do
 		column 'Manufacturer item_id' ,:manufacturer_item_id
 		column :upc_or_ean_id
 		column :cost
+		column :category
 		column :product_name
 		column :short_description
 		column :extended_description

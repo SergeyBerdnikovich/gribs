@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130617145004) do
+ActiveRecord::Schema.define(:version => 20130630194817) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -57,22 +57,22 @@ ActiveRecord::Schema.define(:version => 20130617145004) do
   add_index "gas", ["qty"], :name => "index_gas_on_qty"
 
   create_table "gas_catalog_standards", :force => true do |t|
-    t.string  "item_id"
-    t.string  "manufacturer_item_id"
-    t.string  "upc_or_ean_id"
-    t.string  "manufacturer"
-    t.string  "product_name"
-    t.string  "short_description"
-    t.string  "extended_description"
-    t.string  "images"
-    t.float   "weight"
-    t.float   "length"
-    t.float   "width"
-    t.float   "height"
-    t.integer "categories"
-    t.string  "retail_map"
-    t.string  "msrp"
-    t.string  "stock_status"
+    t.string "item_id"
+    t.string "manufacturer_item_id"
+    t.string "upc_or_ean_id"
+    t.string "manufacturer"
+    t.string "product_name"
+    t.string "short_description"
+    t.string "extended_description"
+    t.string "images"
+    t.float  "weight"
+    t.float  "length"
+    t.float  "width"
+    t.float  "height"
+    t.string "categories"
+    t.string "retail_map"
+    t.string "msrp"
+    t.string "stock_status"
   end
 
   create_table "gas_cost_standards", :force => true do |t|
@@ -90,19 +90,6 @@ ActiveRecord::Schema.define(:version => 20130617145004) do
     t.string  "stock_status"
     t.string  "active_status"
   end
-
-  create_table "itemids", :force => true do |t|
-    t.string "itemid"
-  end
-
-  add_index "itemids", ["itemid"], :name => "index_itemids_on_itemid"
-
-  create_table "items", :force => true do |t|
-    t.string "itemid"
-  end
-
-  add_index "items", ["id"], :name => "index_items_on_id"
-  add_index "items", ["itemid"], :name => "index_items_on_item"
 
   create_table "manufacturers", :force => true do |t|
     t.string   "name"
@@ -144,21 +131,12 @@ ActiveRecord::Schema.define(:version => 20130617145004) do
     t.datetime "updated_at",           :null => false
     t.float    "cost"
     t.integer  "source_id"
+    t.string   "category"
   end
 
   add_index "products", ["item_id"], :name => "index_products_on_item_id"
   add_index "products", ["manufacturer_id"], :name => "index_products_on_manufacturer_id"
   add_index "products", ["upc_or_ean_id"], :name => "index_products_on_upc_or_ean_id"
-
-  create_table "quantities", :force => true do |t|
-    t.integer "item_id"
-    t.integer "qty"
-    t.integer "date"
-  end
-
-  add_index "quantities", ["date"], :name => "index_quantities_on_date"
-  add_index "quantities", ["item_id"], :name => "index_quantities_on_item_id"
-  add_index "quantities", ["qty"], :name => "index_quantities_on_qty"
 
   create_table "rsr", :force => true do |t|
     t.integer "product_id"

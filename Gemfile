@@ -12,6 +12,7 @@ gem 'rails', '3.2.13'
   gem 'twitter-bootstrap-rails'
     gem 'sass-rails',   '~> 3.2.3'
   gem "friendly_id"
+  gem "dalli"
 
   gem 'bootstrap-datepicker-rails'
   gem 'will_paginate-bootstrap'

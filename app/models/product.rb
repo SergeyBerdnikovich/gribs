@@ -5,17 +5,22 @@ class Product < ActiveRecord::Base
   has_many :rsr
   belongs_to :manufacturer
 
-  search_methods :upc_or_ean_id_contains, :upc_or_ean_id_starts_with, :upc_or_ean_id_ends_with
+  search_methods :upc_or_ean_id_contains, :upc_or_ean_id_starts_with, :upc_or_ean_id_ends_with, :upc_or_ean_id_equals
+
+  scope :upc_or_ean_id_equals, lambda { |category_id|
+    Product.joins(:upc_or_ean_id).where("upc_or_ean_id = '?'", category_id)
+  }
+
 
   scope :upc_or_ean_id_contains, lambda { |category_id|
-    Product.joins(:upc_or_ean_id).where("category_id LIKE '%?%'", category_id)
+    Product.joins(:upc_or_ean_id).where("upc_or_ean_id LIKE '%?%'", category_id)
   }
   scope :upc_or_ean_id_starts_with, lambda { |category_id|
-    Product.joins(:upc_or_ean_id).where("category_id LIKE '?%'", category_id)
+    Product.joins(:upc_or_ean_id).where("upc_or_ean_id LIKE '?%'", category_id)
   }
 
   scope :upc_or_ean_id_ends_with, lambda { |category_id|
-    Product.joins(:upc_or_ean_id).where("category_id LIKE '%?'", category_id)
+    Product.joins(:upc_or_ean_id).where("upc_or_ean_id LIKE '%?'", category_id)
   }
 
   def self.to_csv(source_id,period_start, period_end, begin_qty, percent_threshold, cost)
@@ -53,29 +58,19 @@ class Product < ActiveRecord::Base
     cost = 0 if cost == nil
     @source = Source.find(source_id)
     percent_threshold = percent_threshold.to_f
-    #products = Product.find_by_sql("SELECT item_id,manufacturer_item_id, upc_or_ean_id, product_name, manufacturer, qty_available, date FROM products WHERE (date = #{period_start} OR date = #{period_end}) AND qty_available>#{begin_qty} ORDER BY product_name")
-    products = Product.find_by_sql("SELECT product_id, qty, date FROM #{@source.db_name} WHERE (date = #{period_start} OR date = #{period_end}) ")
+    products = ActiveRecord::Base.connection.execute("SELECT bvals.date, bvals.product_id, bvals.qty AS beginval, evals.endval as endval  FROM gas bvals LEFT JOIN (SELECT gas.qty AS endval, gas.product_id  FROM gas WHERE date = #{period_end}) evals ON (bvals.product_id = evals.product_id) WHERE bvals.date = #{period_start} AND bvals.qty >= #{begin_qty};")
+    #products = Product.find_by_sql("SELECT product_id, qty, date FROM #{@source.db_name} WHERE (date = #{period_start} OR date = #{period_end}) AND product_id IN (SELECT product_id FROM #{@source.db_name} WHERE date = #{period_start} AND qty >= #{begin_qty}) ")
     prodarr = Hash.new
     products.each do |product|
-      qty_available = product.qty
-      if qty_available < 0
-        qty_available = 0
-      end
-      if prodarr[product.product_id] == nil
-        #prodarr[product.product_id] = [product.manufacturer_product_id, product.upc_or_ean_id, product.product_name, product.manufacturer, qty_available,nil,product.date]
-        prodarr[product.product_id] = [product.product_id, nil, nil, nil, qty_available,nil,product.date]
-      else
-        if product.date > prodarr[product.product_id][6]
-          bval = prodarr[product.product_id][4]
-          eval = qty_available
-        else
-          eval = prodarr[product.product_id][4]
-          bval = qty_available
-        end
-        prodarr[product.product_id][8] = bval
-        prodarr[product.product_id][9] = eval
+      if prodarr[product[1]] == nil
+        prodarr[product[1]] = [product[1], nil, nil, nil, product[2],nil,product[0]]
+        bval  = product[2]
+        eval = product[3]
+        eval = 0 if eval == nil
+        prodarr[product[1]][8] = bval
+        prodarr[product[1]][9] = eval
         # below is debug
-        # prodarr[product.product_id][7] = "bval = #{bval}, eval = #{eval}, d1 = #{prodarr[product.product_id][6]}, d2 = #{product.date} " # debug row
+        # prodarr[product[1]][7] = "bval = #{bval}, eval = #{eval}, d1 = #{prodarr[product[1]][6]}, d2 = #{product.date} " # debug row
         if bval != 0  #to solve NaN
           percent =   (((eval - bval) / bval.to_f) * 100.0)
         else
@@ -83,15 +78,15 @@ class Product < ActiveRecord::Base
         end
         if (percent_threshold >= 0)
           if percent > percent_threshold
-            prodarr[product.product_id][5] = '%.0f' % percent
+            prodarr[product[1]][5] = '%.0f' % percent
           else
-            prodarr.delete(product.product_id)
+            prodarr.delete(product[1])
           end
         else
           if percent < percent_threshold
-            prodarr[product.product_id][5] = '%.0f' % percent
+            prodarr[product[1]][5] = '%.0f' % percent
           else
-            prodarr.delete(product.product_id)
+            prodarr.delete(product[1])
           end
         end
       end
@@ -100,12 +95,8 @@ class Product < ActiveRecord::Base
     retarr = Hash.new
     prodarr.collect do |k,product|
       @tp = Product.find(product[0])
-      #[product.manufacturer_product_id, product.upc_or_ean_id, product.product_name, product.manufacturer, qty_available,nil,product.date]
-      #prodarr[product.product_id] = [product.product_id, nil, nil, nil, qty_available,nil,product.date]
-      @tp.cost = 0 if @tp.cost == nil
-
-
       if product[8].to_i >= begin_qty #begin quantity filter
+        @tp.cost = 0 if @tp.cost == nil
         if @tp.cost >=  cost  #implementing cost filter
           i += 1
           # raise @tp.inspect if i == 2
@@ -121,8 +112,29 @@ class Product < ActiveRecord::Base
       end
 
     end
-
     return retarr
+  end
+
+
+  def self.days_drop(start_date, days=2,trashhold, source)
+
+    joins = " "
+    selects = "todayvals.* "
+    wheres  = "todayvals.qty > 0 AND todayvals.date = #{start_date} "
+
+    days.to_i.times do |day|
+      day += 1
+      date = (DateTime.strptime(start_date,"%Y%m%d") - day.to_i.day).strftime("%Y%m%d")
+      selects += ", #{day}dayvals.qty "
+      joins += " LEFT JOIN (SELECT gas.qty, gas.product_id FROM gas WHERE date = #{date} and qty > 0) #{day}dayvals ON #{day}dayvals.product_id = todayvals.product_id "
+      wheres += " AND ((todayvals.qty - #{day}dayvals.qty) / #{day}dayvals.qty) > #{trashhold} "
+    end
+
+    products = ActiveRecord::Base.connection.execute("SELECT #{selects} FROM gas todayvals #{joins} WHERE #{wheres} ;")
+    #raise "SELECT #{selects} FROM gas todayvals #{joins} WHERE #{wheres} ;"
+
+    return products.to_a
 
   end
+
 end

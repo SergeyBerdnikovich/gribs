@@ -1,7 +1,7 @@
 <div id='filter_zone'>
   <div id='filter'>
     <%= form_tag reports_mashrooms_path, :method => :get do %>
-      <span>Choose supplier:</span>
+      <span>Choose source:</span>
       <%= select_tag "source_id", options_from_collection_for_select(Source.all, "id", "name", params[:source_id]), :include_blank => false %><br>
 
       <span>First date:</span>
