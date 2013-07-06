@@ -51,7 +51,7 @@ def process_catalog
         if check[0] != nil
             if check[0]["category"] == nil
                 if product['categories'] != nil
-                    check = $sql.query("DELETE FROM products WHERE item_id = '#{product['item_id']}' AND source_id = 1").to_a       
+                    $sql.query("UPDATE products SET category = '#{escape(product['categories'])}' WHERE item_id = '#{product['item_id']}' AND source_id = 1").to_a   
                     p "cat fixed" 
                     p product
                 end
@@ -87,11 +87,10 @@ def process_inventory(date = Time.now.strftime("%Y%m%d"))
             if product_id[0] != nil
             if product_id[0]["category"] == nil
                 if rsr["DepartmentNumber"] != nil
-                    product_id = $sql.query("DELETE FROM products WHERE item_id = '#{rsr["RSRStockNumber"]}' AND source_id = 2").to_a       
+                    $sql.query("UPDATE products SET category = '#{escape(rsr["DepartmentNumber"])}' WHERE item_id = '#{rsr["RSRStockNumber"]}' AND source_id = 2").to_a       
                     p "cat fixed" 
                     p rsr
                 end
-
             end
         end
 
@@ -182,7 +181,7 @@ end
 
 EM.run do
 
-   download_and_rename
+   #download_and_rename
    process_files
 
     process_inventory

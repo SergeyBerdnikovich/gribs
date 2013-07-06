@@ -58,7 +58,7 @@ class Product < ActiveRecord::Base
     cost = 0 if cost == nil
     @source = Source.find(source_id)
     percent_threshold = percent_threshold.to_f
-    products = ActiveRecord::Base.connection.execute("SELECT bvals.date, bvals.product_id, bvals.qty AS beginval, evals.endval as endval  FROM gas bvals LEFT JOIN (SELECT gas.qty AS endval, gas.product_id  FROM gas WHERE date = #{period_end}) evals ON (bvals.product_id = evals.product_id) WHERE bvals.date = #{period_start} AND bvals.qty >= #{begin_qty};")
+    products = ActiveRecord::Base.connection.execute("SELECT bvals.date, bvals.product_id, bvals.qty AS beginval, evals.endval as endval  FROM #{@source.db_name} bvals LEFT JOIN (SELECT #{@source.db_name}.qty AS endval, #{@source.db_name}.product_id  FROM #{@source.db_name} WHERE date = #{period_end}) evals ON (bvals.product_id = evals.product_id) WHERE bvals.date = #{period_start} AND bvals.qty >= #{begin_qty};")
     #products = Product.find_by_sql("SELECT product_id, qty, date FROM #{@source.db_name} WHERE (date = #{period_start} OR date = #{period_end}) AND product_id IN (SELECT product_id FROM #{@source.db_name} WHERE date = #{period_start} AND qty >= #{begin_qty}) ")
     prodarr = Hash.new
     products.each do |product|
@@ -116,22 +116,30 @@ class Product < ActiveRecord::Base
   end
 
 
-  def self.days_drop(start_date, days=2,trashhold, source)
+  def self.days_drop(start_date, days,threshold, source , qty = 0 , cost = 0)
+    threshold = threshold.to_f / 100.0
 
     joins = " "
     selects = "todayvals.* "
-    wheres  = "todayvals.qty > 0 AND todayvals.date = #{start_date} "
+    wheres  = "todayvals.qty >= #{qty} AND todayvals.date = #{start_date} "
 
     days.to_i.times do |day|
       day += 1
       date = (DateTime.strptime(start_date,"%Y%m%d") - day.to_i.day).strftime("%Y%m%d")
       selects += ", #{day}dayvals.qty "
-      joins += " LEFT JOIN (SELECT gas.qty, gas.product_id FROM gas WHERE date = #{date} and qty > 0) #{day}dayvals ON #{day}dayvals.product_id = todayvals.product_id "
-      wheres += " AND ((todayvals.qty - #{day}dayvals.qty) / #{day}dayvals.qty) > #{trashhold} "
+      joins += " LEFT JOIN gas #{day}dayvals ON #{day}dayvals.product_id = todayvals.product_id AND #{day}dayvals.date = #{date}"
+      prev = ""
+    #  if day == 1
+        prev = "todayvals"      
+    #  else
+    #    prev = "#{day-1}dayvals"      
+    #  end
+      wheres += " AND ( (((#{prev}.qty - #{day}dayvals.qty) / #{day}dayvals.qty) < #{threshold})  OR  #{day}dayvals.qty IS NULL OR #{day}dayvals.qty = 0 
+        )  "
     end
 
-    products = ActiveRecord::Base.connection.execute("SELECT #{selects} FROM gas todayvals #{joins} WHERE #{wheres} ;")
-    #raise "SELECT #{selects} FROM gas todayvals #{joins} WHERE #{wheres} ;"
+    products = ActiveRecord::Base.connection.execute("SELECT #{selects} FROM #{source.db_name} todayvals #{joins} WHERE #{wheres} ;")
+    #raise "SELECT #{selects} FROM #{source.db_name} todayvals #{joins} WHERE #{wheres} ;"
 
     return products.to_a
 

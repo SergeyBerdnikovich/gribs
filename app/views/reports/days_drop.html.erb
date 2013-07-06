@@ -9,8 +9,17 @@
         Days:
         <%= text_field_tag 'days', params[:days] %>
        <br>       
-        Trashhold:
-        <%= text_field_tag 'trashhold', params[:trashhold] %>
+        Threshold:
+        <%= text_field_tag 'threshold', params[:threshold] %>
+        <br>       
+        Begin qty:
+        <%= text_field_tag 'qty', params[:qty] %>
+        <br>       
+        Minimal cost:
+        <%= text_field_tag 'cost', params[:cost] %>
+        <br>       
+
+        
 
         
       </div>
@@ -55,7 +64,6 @@
 
       <% @products.each do |products| %>
         <% if products[0] != nil  %>
-
         <tr>
           <td><%= products[0].item_id %></td>
           <td><%= products[0].upc_or_ean_id %></td>

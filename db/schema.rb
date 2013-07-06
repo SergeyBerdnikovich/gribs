@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130630194817) do
+ActiveRecord::Schema.define(:version => 20130706105532) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -50,11 +50,13 @@ ActiveRecord::Schema.define(:version => 20130630194817) do
     t.integer "product_id"
     t.integer "date"
     t.integer "qty"
+    t.integer "sales"
   end
 
   add_index "gas", ["date"], :name => "index_gas_on_date_update"
   add_index "gas", ["product_id"], :name => "index_gas_on_product_id"
   add_index "gas", ["qty"], :name => "index_gas_on_qty"
+  add_index "gas", ["sales"], :name => "index_gas_on_sales"
 
   create_table "gas_catalog_standards", :force => true do |t|
     t.string "item_id"
@@ -142,11 +144,13 @@ ActiveRecord::Schema.define(:version => 20130630194817) do
     t.integer "product_id"
     t.integer "date"
     t.integer "qty"
+    t.integer "sales"
   end
 
   add_index "rsr", ["date"], :name => "index_rsr_on_date"
   add_index "rsr", ["product_id"], :name => "index_rsr_on_product_id"
   add_index "rsr", ["qty"], :name => "index_rsr_on_qty"
+  add_index "rsr", ["sales"], :name => "index_rsr_on_sales"
 
   create_table "rsr_inventories", :force => true do |t|
     t.string   "RSRStockNumber"
